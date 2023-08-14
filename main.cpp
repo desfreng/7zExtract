@@ -8,7 +8,7 @@ namespace fs = std::filesystem;
 int main() {
     fs::path input_file("/home/gabriel/IGN Files/SCAN25_3-1_TOUR_TIFF_LAMB93_D014_2022-12-01.7z");
 //    fs::path input_file("../lzma2301.7z");
-    fs::path out_dir("../test/");
+    fs::path out_dir("./test/");
 
     if (exists(out_dir)) {
         remove_all(out_dir);
