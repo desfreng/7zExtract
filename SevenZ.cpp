@@ -5,11 +5,11 @@
 #include <fstream>
 
 #include "SevenZ.h"
-#include "7zLib/7zTypes.h"
-#include "7zLib/7zAlloc.h"
-#include "7zLib/7zCrc.h"
-#include "7zLib/7zFile.h"
-#include "7zLib/7z.h"
+#include "7zTypes.h"
+#include "7zAlloc.h"
+#include "7zCrc.h"
+#include "7zFile.h"
+#include "7z.h"
 
 typedef struct FILETIME {
     DWORD dwLowDateTime;
