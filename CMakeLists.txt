@@ -1,14 +1,22 @@
-cmake_minimum_required(VERSION 3.20)
-project(7zExtract)
+CMAKE_MINIMUM_REQUIRED(VERSION 3.20)
+PROJECT(7zExtract)
 
-add_subdirectory(lzma-sdk)
-add_library(7zExtract SevenZ.cpp SevenZ.h)
+OPTION(LZMA_WITH_AES "Build AES Support in lzma-sdk" ON)
+OPTION(LZMA_WITH_SHA "Build SHA Support in lzma-sdk" ON)
+OPTION(LZMA_WITH_XZ "Build XZ Support in lzma-sdk" ON)
+OPTION(7Z_EXTRACT_WITH_EXAMPLE "Build 7zExtract Example" ON)
 
-target_include_directories(7zExtract PRIVATE lzma-sdk)
-target_link_libraries(7zExtract PRIVATE lzma-sdk)
+ADD_SUBDIRECTORY(lzma-sdk)
+ADD_LIBRARY(7zExtract SevenZ.cpp SevenZ.h)
 
-set_property(TARGET 7zExtract PROPERTY CXX_STANDARD 17)
-set_property(TARGET 7zExtract PROPERTY CXX_STANDARD_REQUIRED ON)
+TARGET_INCLUDE_DIRECTORIES(7zExtract PRIVATE lzma-sdk)
+TARGET_LINK_LIBRARIES(7zExtract PRIVATE lzma-sdk)
 
-add_executable(7zExtractTester main.cpp)
-target_link_libraries(7zExtractTester 7zExtract)
+SET_PROPERTY(TARGET 7zExtract PROPERTY CXX_STANDARD 17)
+SET_PROPERTY(TARGET 7zExtract PROPERTY CXX_STANDARD_REQUIRED ON)
+
+IF (7Z_EXTRACT_WITH_EXAMPLE)
+    MESSAGE("7zExtract: Building Example")
+    ADD_EXECUTABLE(7zExtractTester main.cpp)
+    TARGET_LINK_LIBRARIES(7zExtractTester 7zExtract)
+ENDIF ()
